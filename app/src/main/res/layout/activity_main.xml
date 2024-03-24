@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="231dp"
         android:layout_height="128dp"
         android:fontFamily="sans-serif-black"
@@ -17,10 +18,22 @@
         android:textColor="#4EE854"
         android:textSize="60sp"
         android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.094" />
+
+    <Button
+        android:id="@+id/contact1activity"
+        android:layout_width="223dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="172dp"
+        android:text="Edit Contact"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
