@@ -1,6 +1,8 @@
+import multiprocessing
 import re
 import json
 import subprocess
+import os
 import speech_recognition as sr
 from difflib import SequenceMatcher
 
@@ -59,6 +61,7 @@ def process_command(text):
         if x == len(split_safe) - 1:
             print("Alerting Emergency Contacts...")
             exit = True
+            return
         if errorCount == 3:
             print("Restarting search...")
             x = 0
@@ -80,11 +83,12 @@ def get_safe_word():
 
 
 # Continuously listen for commands
-def run():
-
+def run():   
+    conn1, conn2 = multiprocessing.Pipe(duplex=True)
     while True:
         if (exit):
-            print("Program Exiting...")
+            print("Program Exiting...\nContacting Server...")
+            
             break
         else:
             try:
