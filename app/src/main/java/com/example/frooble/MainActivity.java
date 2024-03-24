@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     String email;
 
     EditText email1Id;
-    TextInputEditText work;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,10 +30,10 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        email = getString(R.string.Enter_Email);
+        //email = getString(R.string.Enter_Email);
 
         Button contact1 = findViewById(R.id.contact1activity);
-        work = getString(R.string.Enter_Email);
+        email = getString(R.string.Enter_Email);
         // email1Id = (EditText) findViewById(R.id.email1Id);
         // textInputEditText = findViewById(R.id.email1Id);
         contact1.setOnClickListener(new View.OnClickListener() {
