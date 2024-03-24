@@ -1,5 +1,8 @@
 package com.example.frooble;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -22,6 +25,8 @@ import java.util.List;
 public class Contact1Activity extends AppCompatActivity {
 
     String email;
+    Email contactEmail;
+    Contact contact;
     TextInputEditText inputEditText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +52,7 @@ public class Contact1Activity extends AppCompatActivity {
                 // For example:
                 showToast("User input: " + email);
                 // Create a new Contact object
-                Contact contact = new Contact("New Contact", email, "");
+                contact = new Contact("New Contact", email, "");
                 // Optionally, you can add the new contact to a list if needed
                 // contact.addToList(contact);
                 // Log the creation of the contact
@@ -57,10 +62,10 @@ public class Contact1Activity extends AppCompatActivity {
                // List<Contact> c = user.getContacts();
                // Email contactEmail = new Email(c.get(0), "Finally working");
                 //contactEmail.send();
-                Email contactEmail = new Email(contact, "Finally working", Contact1Activity.this);
+                contactEmail = new Email(contact, "Finally working", Contact1Activity.this);
                 Log.d("Contact1 Activity", "Contact created: " + contact.getName() + " - " + contact.getEmail());
-
-                contactEmail.sendEmail();
+                sendMail();
+                //contactEmail.sendMail();
                 // Optionally, you can add the new contact to a list if needed
                 // contact.addToList(contact);
                 // Log the creation of the contact
@@ -68,6 +73,16 @@ public class Contact1Activity extends AppCompatActivity {
                 //Log.d("Contact2Activity", "Contact created: " + contact.getName() + " - " + contact.getEmail());
             }
         });
+    }
+
+    public void sendMail() {
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        //emailIntent.setData(Uri.parse("mailto:" + this.email));
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "URGENT");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "HELP");
+        emailIntent.setType("message/rfc822");
+        startActivity(Intent.createChooser(emailIntent, "Choose email client"));
     }
 
     public void saveInput(View view) { // Corrected the method signature
@@ -82,7 +97,7 @@ public class Contact1Activity extends AppCompatActivity {
         user.addContact(contact);
         List<Contact> c = user.getContacts();
         Email contactEmail = new Email(c.get(0), "Finally working", Contact1Activity.this);
-        contactEmail.sendEmail();
+        //contactEmail.sendEmail();
         // Optionally, you can add the new contact to a list if needed
         // contact.addToList(contact);
         // Log the creation of the contact

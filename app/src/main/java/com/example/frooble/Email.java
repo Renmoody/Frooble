@@ -1,5 +1,7 @@
 package com.example.frooble;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -29,17 +31,21 @@ public class Email extends Authenticator {
         this.context = context;
     }
 
-    public void sendEmail() {
-        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-        emailIntent.setData(Uri.parse("mailto:" + this.email));
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "URGENT");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, message);
-
-        // Check if there's an email client installed on the device
-        if (emailIntent.resolveActivity(context.getPackageManager()) != null) {
-            context.startActivity(Intent.createChooser(emailIntent, "Send Email"));
-        }
-    }
+//    public void sendEmail() {
+//        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+//        //emailIntent.setData(Uri.parse("mailto:" + this.email));
+//        emailIntent.putExtra(Intent.EXTRA_EMAIL, email);
+//        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "URGENT");
+//        emailIntent.putExtra(Intent.EXTRA_TEXT, message);
+//        emailIntent.setType("message/rfc822");
+//        startActivity(Intent.createChooser(emailIntent, "Choose email client"));
+//
+//        // Check if there's an email client installed on the device
+////        if (emailIntent.resolveActivity(context.getPackageManager()) != null) {
+////            context.startActivity(Intent.createChooser(emailIntent, "Send Email"));
+////        }
+//    }
+}
 //    public void send() {
 //        String mEmail = email.getText().toString();
 //        String mSubject = subject.getText().toString();
@@ -93,4 +99,4 @@ public class Email extends Authenticator {
 //            throw new RuntimeException(e);
 //        }
 //    }
-}
+
