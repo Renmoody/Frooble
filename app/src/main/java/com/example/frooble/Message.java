@@ -1,3 +1,5 @@
+package com.example.frooble;
+
 public class Message {
     private String message;
 
@@ -17,4 +19,5 @@ public class Message {
         this.message = message;
     }
 }
+
 

@@ -1,3 +1,5 @@
+package com.example.frooble;
+
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -6,12 +8,12 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
-import com.example.frooble.Contact;
+
 
 public class Email extends Authenticator {
 
-    private String email;
-    private String message;
+    private static String email;
+    private static String message;
 
     public Email(Contact contact, String message) {
         this.email = contact.getEmail();
