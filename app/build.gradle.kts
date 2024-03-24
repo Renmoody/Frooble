@@ -46,5 +46,10 @@ dependencies {
     implementation("javax.mail:mail:1.4.7")
     // https://mvnrepository.com/artifact/javax.mail/mail
     implementation("javax.mail:mail:1.4")
+    // https://mvnrepository.com/artifact/javax.mail/javax.mail-api
+    implementation("javax.mail:javax.mail-api:1.6.2")
+    // https://mvnrepository.com/artifact/org.springframework/spring-context
+    implementation("org.springframework:spring-context:6.1.5")
+
 
 }
