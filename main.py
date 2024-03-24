@@ -6,7 +6,7 @@ from difflib import SequenceMatcher
 
 recognizer = sr.Recognizer()
 exit = False
-safe_word = ""
+safe_word = "default phrase set new phrase"
 
 def process_text(text):
         filtered_text = re.sub(r'[^\w\s]', '', text).lower()
@@ -41,6 +41,7 @@ def listen_for_phrase():
     except sr.UnknownValueError:
         print("Sorry, could not understand audio.")
         
+
 def process_command(text):
     # Define keywords or sentences to match
     if safe_word in text:
@@ -91,3 +92,4 @@ def run():
             except KeyboardInterrupt:  # Catch Ctrl+C interrupts to exit gracefully
                 print("KeyboardInterrupt...")
                 break
+run()
