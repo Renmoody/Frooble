@@ -1,6 +1,4 @@
 import re
-import json
-import subprocess
 import speech_recognition as sr
 from difflib import SequenceMatcher
 
@@ -59,6 +57,7 @@ def process_command(text):
         if x == len(split_safe) - 1:
             print("Alerting Emergency Contacts...")
             exit = True
+            return
         if errorCount == 3:
             print("Restarting search...")
             x = 0
@@ -80,16 +79,18 @@ def get_safe_word():
 
 
 # Continuously listen for commands
-def run():
-
+def run():   
     while True:
         if (exit):
             print("Program Exiting...")
-            break
+            return True
         else:
             try:
                 listen_for_phrase()
-            except KeyboardInterrupt:  # Catch Ctrl+C interrupts to exit gracefully
+            except KeyboardInterrupt:  # Catch Ctrl+C interrupts to exit
                 print("KeyboardInterrupt...")
                 break
+    return False
+
+set_safe_word()
 run()
