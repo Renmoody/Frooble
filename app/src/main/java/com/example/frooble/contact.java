@@ -1,47 +1,49 @@
-data class Contact (
-    var name: String,
-    var email: String,
-    var phone: String,
-    var contactList: MutableList<Contact> = mutableListOf(),
-) {
-    constructor(name: String, email: String, phone: String) : this(name, email, phone, mutableListOf())
-}
+import java.util.ArrayList;
+import java.util.List;
 
-fun edit(contact: Contact, NName: String, NEmail: String, NPhone: String): Contact {
-    if (contact != null){
-        return
+public class Contact {
+    private String name;
+    private String email;
+    private String phone;
+    private List<Contact> contactList;
+
+    public Contact(String name, String email, String phone) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.contactList = new ArrayList<>();
     }
-    if (NName != null){
-        contact.name = NName
 
+    public Contact edit(String newName, String newEmail, String newPhone) {
+        if (newName != null) {
+            this.name = newName;
+        }
+        if (newEmail != null) {
+            this.email = newEmail;
+        }
+        if (newPhone != null) {
+            this.phone = newPhone;
+        }
+        return this;
     }
-    if (NEmail != null){
-        contact.email = NEmail
 
+    public void addToList(Contact contact) {
+        this.contactList.add(contact);
     }
-    if (NPhone != null){
-        contact.phone = NPhone
 
+    public void deleteFromList(Contact contact) {
+        this.contactList.remove(contact);
     }
-    contact.phone = NPhone
-    return contact
-}
 
-fun addToList(contact: Contact, that: Contact) {
-    contact.contactList.add(that)
-}
+    public String getEmail() {
+        return this.email;
+    }
 
-fun deleteFromList(contact : Contact, that : Contact) {
-    contact.contactList.remove(that)
-}
+    public String getName() {
+        return this.name;
+    }
 
-fun getEmail (contact: Contact) : String {
-    return contact.email
-}
-
-fun getName (contact: Contact) : String {
-    return contact.name
-}
-fun getPhone (contact: Contact) : String {
-    return contact.phone
+    public String getPhone() {
+        return this.phone;
+    }
 }
