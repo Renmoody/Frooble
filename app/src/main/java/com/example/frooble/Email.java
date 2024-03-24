@@ -26,7 +26,7 @@ public class Email extends Authenticator {
         } else {
             this.message = message;
         }
-
+        this.context = context;
     }
 
     public void sendEmail() {
