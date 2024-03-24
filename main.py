@@ -11,7 +11,7 @@ def process_text(text):
         filtered_text = re.sub(r'[^\w\s]', '', text).lower()
         return filtered_text
 
-def string_similarity(string1, string2):
+def compare(string1, string2):
     # Calculate similarity ratio using SequenceMatcher
     similarity_ratio = SequenceMatcher(None, string1, string2).ratio()
     # Check if similarity ratio is greater than or equal to 0.9
@@ -42,11 +42,34 @@ def listen_for_phrase():
         
 def process_command(text):
     # Define keywords or sentences to match
-    if string_similarity(safe_word, text) or safe_word in text:
+    if safe_word in text:
+        
         print("Alerting Emergency Contacts")
         global exit
         exit = True
         # Perform action to turn on lights
+    split_text = text.split(" ")
+    split_safe = safe_word.split(" ")
+    x = 0
+    errorCount = 0
+    #return true if safe words are in the correct order in the text with a 90% accuracy
+    #only permit a margin of two words for error in between the safe word detection
+    for i in split_text:
+        if x == len(split_safe):
+            print("Safe Word Detected")
+            exit = True
+        if errorCount > 1:
+            x = 0
+            errorCount = 0
+        if compare(i, split_safe[x]):
+            x+=1
+        else:
+            errorCount+=1
+        
+        
+        
+        
+
     else:
         print("Safe Word Not Detected")
 #Getters and setters for safe phrase
