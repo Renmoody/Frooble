@@ -1,7 +1,6 @@
 package com.example.frooble;
 
 import android.os.Bundle;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -22,6 +21,13 @@ public class MainActivity extends AppCompatActivity {
     EditText email1Id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        List<String> list = new ArrayList<String>();
+        list.add("main.py");
+
+        ProcessBuilder build = new ProcessBuilder(list);
+        Process process = processBuilder.start();
+        process.waitFor();
+       
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -31,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         //email = getString(R.string.Enter_Email);
+
 
         Button contact1 = findViewById(R.id.contact1activity);
         email = getString(R.string.Enter_Email);
@@ -46,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void showToast(String text) {
         Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
