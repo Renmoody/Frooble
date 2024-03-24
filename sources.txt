@@ -1,0 +1,17 @@
+Sources
+
+#Listens for the safe word/sentance - modified from chatGPT3.5 example
+def listen_for_phrase():
+    with sr.Microphone() as source:
+        print("Listening...")
+        audio = recognizer.adjust_for_ambient_noise(source)
+        audio = recognizer.listen(source)
+    try:
+        # Use Google Speech Recognition to transcribe the audio
+        text = recognizer.recognize_whisper(audio)
+        filtered_text = process_text(text)
+        if "thank you" == filtered_text:
+            return
+        process_command(filtered_text)
+    except sr.UnknownValueError:
+        print("Sorry, could not understand audio.")

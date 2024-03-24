@@ -23,7 +23,7 @@ def exit_program():
     global exit
     exit = True
 
-#Listens for the safe word/sentance
+#Listens for the safe word/sentance - modified from AI generated example
 def listen_for_phrase():
     with sr.Microphone() as source:
         print("Listening...")

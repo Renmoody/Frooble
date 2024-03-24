@@ -19,3 +19,5 @@ Ren and Christopher will build backend application to determine users in destres
 
 Stage 3 : Connecting Everything
 Jackson will be making the application one by using sockets to connect the frontend and backend of the application. James is doing finishing touches on application UI and front end functionality. Ren and Christopher have finishing building the Python API.
+Stage 4 : Devposts
+Self explanitory.
