@@ -1,8 +1,10 @@
 import speech_recognition as sr
 import re
+import time
 from difflib import SequenceMatcher
 global exit
 global safe_word
+global recognizer
 
 exit = False
 
@@ -23,17 +25,29 @@ def exit_program():
     global exit
     exit = True
     
+def callback(recognizer, audio):
+    try:
+        recognizer.recognize(audio)
+    except sr.UnknownValueError:
+        print("Sorry, could not understand audio.")
+    except sr.RequestError as e:
+        print("Error fetching results; {0}".format(e))
+    
 #Listens for the safe word/sentance
 def listen_for_command():
-    recognizer = sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening...")
+        global recognizer
+        recognizer = sr.Recognizer()
+        recognizer.listen_in_background(sr.Microphone, callback)
         audio = recognizer.adjust_for_ambient_noise(source)
         audio = recognizer.listen(source)
     try:
         # Use Google Speech Recognition to transcribe the audio
         text = recognizer.recognize_whisper(audio)
         filtered_text = process_text(text)
+        if "thank you" == filtered_text:
+            return
         print("You said:", filtered_text)
         process_command(filtered_text)
     except sr.UnknownValueError:
@@ -60,8 +74,14 @@ def run():
             print("Program Exiting...")
             break
         else:
+            try:
+                time.sleep(0.1)
+            except KeyboardInterrupt:  # Catch Ctrl+C interrupts to exit gracefully
+                print("KeyboardInterrupt...")
+                break
             listen_for_command()
             
 set_safe_word()
+
 print("Safe Word/Sentance : " + safe_word)
 run()
