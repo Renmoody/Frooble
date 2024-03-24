@@ -36,20 +36,14 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        //email = getString(R.string.Enter_Email);
-
 
         Button contact1 = findViewById(R.id.contact1activity);
         email = getString(R.string.Enter_Email);
-        // email1Id = (EditText) findViewById(R.id.email1Id);
-        // textInputEditText = findViewById(R.id.email1Id);
         contact1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,Contact1Activity.class);
                 startActivity(intent);
-//                email = email1Id.getText().toString();
-//                Toast.makeText(MainActivity.this, "User input: " + email, Toast.LENGTH_SHORT).show();
             }
         });
     }
