@@ -8,6 +8,7 @@ Project Goal - This project is geared towards public safety. Unfortunately, peop
 Languages - Android studio, Twilio, Python
 
 Things to research and project task allocation allocation:
+
 Stage 1:
 James and Jackson will be researching android studio windows.
 Ren and Christopher will be working on audio detection and voice to text for analyzing.
