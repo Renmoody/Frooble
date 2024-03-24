@@ -11,6 +11,7 @@ def process_text(text):
         filtered_text = re.sub(r'[^\w\s]', '', text).lower()
         return filtered_text
 
+#calculates the similarity ratio between two strings
 def compare(string1, string2):
     # Calculate similarity ratio using SequenceMatcher
     similarity_ratio = SequenceMatcher(None, string1, string2).ratio()
@@ -40,6 +41,7 @@ def listen_for_phrase():
     except sr.UnknownValueError:
         print("Sorry, could not understand audio.")
         
+
 def process_command(text):
     # Define keywords or sentences to match
     if safe_word in text:
