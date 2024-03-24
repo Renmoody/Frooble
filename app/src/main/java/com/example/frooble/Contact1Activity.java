@@ -57,10 +57,10 @@ public class Contact1Activity extends AppCompatActivity {
                // List<Contact> c = user.getContacts();
                // Email contactEmail = new Email(c.get(0), "Finally working");
                 //contactEmail.send();
-                Email contactEmail = new Email(contact, "Finally working");
+                Email contactEmail = new Email(contact, "Finally working", Contact1Activity.this);
                 Log.d("Contact1 Activity", "Contact created: " + contact.getName() + " - " + contact.getEmail());
 
-                contactEmail.send();
+                contactEmail.sendEmail();
                 // Optionally, you can add the new contact to a list if needed
                 // contact.addToList(contact);
                 // Log the creation of the contact
@@ -81,8 +81,8 @@ public class Contact1Activity extends AppCompatActivity {
         User user = new User("DeviceUser", null);
         user.addContact(contact);
         List<Contact> c = user.getContacts();
-        Email contactEmail = new Email(c.get(0), "Finally working");
-        contactEmail.send();
+        Email contactEmail = new Email(c.get(0), "Finally working", Contact1Activity.this);
+        contactEmail.sendEmail();
         // Optionally, you can add the new contact to a list if needed
         // contact.addToList(contact);
         // Log the creation of the contact
