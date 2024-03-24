@@ -1,16 +1,17 @@
-import speech_recognition as sr
 import re
+import json
+import subprocess
+import speech_recognition as sr
 from difflib import SequenceMatcher
-global exit
-global safe_word
-global recognizer
+
 recognizer = sr.Recognizer()
 exit = False
+safe_word = ""
 
 def process_text(text):
         filtered_text = re.sub(r'[^\w\s]', '', text).lower()
         return filtered_text
-
+    
 def compare(string1, string2):
     # Calculate similarity ratio using SequenceMatcher
     similarity_ratio = SequenceMatcher(None, string1, string2).ratio()
@@ -90,8 +91,3 @@ def run():
             except KeyboardInterrupt:  # Catch Ctrl+C interrupts to exit gracefully
                 print("KeyboardInterrupt...")
                 break
-        
-if __name__ == "__main__":
-    set_safe_word()
-    print("Safe Word/Sentance : " + safe_word)
-    run()
