@@ -9,10 +9,13 @@ Languages - Android studio, Twilio, Python
 
 Things to research and project task allocation allocation:
 
-Stage 1:
+Stage 1 : Research
 James and Jackson will be researching android studio windows.
 Ren and Christopher will be working on audio detection and voice to text for analyzing.
 
-Stage 2: 
+Stage 2 : Implimentation and Debugging
 James and Jackson will start implementing app functionality using android studio to have the ability to email users emergency contact list after the users selected phrase is said.
 Ren and Christopher will build backend application to determine users in destress to determine if they are in danger. Built in python using a speech recognition library.
+
+Stage 3 : Connecting Everything
+Jackson will be making the application one by using sockets to connect the frontend and backend of the application. James is doing finishing touches on application UI and front end functionality. Ren and Christopher have finishing building the Python API.

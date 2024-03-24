@@ -11,6 +11,7 @@ def process_text(text):
         filtered_text = re.sub(r'[^\w\s]', '', text).lower()
         return filtered_text
 
+#calculates the similarity ratio between two strings
 def compare(string1, string2):
     # Calculate similarity ratio using SequenceMatcher
     similarity_ratio = SequenceMatcher(None, string1, string2).ratio()
@@ -40,6 +41,7 @@ def listen_for_phrase():
     except sr.UnknownValueError:
         print("Sorry, could not understand audio.")
         
+
 def process_command(text):
     # Define keywords or sentences to match
     if safe_word in text:
@@ -47,7 +49,6 @@ def process_command(text):
         print("Alerting Emergency Contacts")
         global exit
         exit = True
-        # Perform action to turn on lights
     split_text = text.split(" ")
     split_safe = safe_word.split(" ")
     x = 0
@@ -55,23 +56,19 @@ def process_command(text):
     #return true if safe words are in the correct order in the text with a 90% accuracy
     #only permit a margin of two words for error in between the safe word detection
     for i in split_text:
-        if x == len(split_safe):
-            print("Safe Word Detected")
+        if x == len(split_safe) - 1:
+            print("Alerting Emergency Contacts...")
             exit = True
-        if errorCount > 1:
+        if errorCount == 3:
+            print("Restarting search...")
             x = 0
             errorCount = 0
         if compare(i, split_safe[x]):
             x+=1
+            errorCount = 0
         else:
             errorCount+=1
-        
-        
-        
-        
-
-    else:
-        print("Safe Word Not Detected")
+    
 #Getters and setters for safe phrase
 def set_safe_word():
     global safe_word
@@ -96,7 +93,7 @@ def run():
                 print("KeyboardInterrupt...")
                 break
         
-set_safe_word()
-
-print("Safe Word/Sentance : " + safe_word)
-run()
+if __name__ == "__main__":
+    set_safe_word()
+    print("Safe Word/Sentance : " + safe_word)
+    run()
