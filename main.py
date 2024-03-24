@@ -1,6 +1,5 @@
 import speech_recognition as sr
 import re
-import time
 from difflib import SequenceMatcher
 global exit
 global safe_word
