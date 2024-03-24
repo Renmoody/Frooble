@@ -5,7 +5,7 @@ from difflib import SequenceMatcher
 global exit
 global safe_word
 global recognizer
-
+recognizer = sr.Recognizer()
 exit = False
 
 def process_text(text):
@@ -24,22 +24,11 @@ def string_similarity(string1, string2):
 def exit_program():
     global exit
     exit = True
-    
-def callback(recognizer, audio):
-    try:
-        recognizer.recognize(audio)
-    except sr.UnknownValueError:
-        print("Sorry, could not understand audio.")
-    except sr.RequestError as e:
-        print("Error fetching results; {0}".format(e))
-    
+
 #Listens for the safe word/sentance
-def listen_for_command():
+def listen_for_phrase():
     with sr.Microphone() as source:
         print("Listening...")
-        global recognizer
-        recognizer = sr.Recognizer()
-        recognizer.listen_in_background(sr.Microphone, callback)
         audio = recognizer.adjust_for_ambient_noise(source)
         audio = recognizer.listen(source)
     try:
@@ -48,39 +37,43 @@ def listen_for_command():
         filtered_text = process_text(text)
         if "thank you" == filtered_text:
             return
-        print("You said:", filtered_text)
         process_command(filtered_text)
     except sr.UnknownValueError:
         print("Sorry, could not understand audio.")
-
+        
 def process_command(text):
     # Define keywords or sentences to match
-    if string_similarity(safe_word, text):
+    if string_similarity(safe_word, text) or safe_word in text:
         print("Alerting Emergency Contacts")
         global exit
         exit = True
         # Perform action to turn on lights
     else:
         print("Safe Word Not Detected")
+#Getters and setters for safe phrase
 def set_safe_word():
     global safe_word
-    safe_word = process_text(input("Please Enter your safe word/sentance, to change this later, go to settings.\n"))
+    safe_word = process_text(input("Please enter your safe phrase, a minimum number of four words is required to reduce false readings. To change this later, go to settings.\n"))
+    if (safe_word.count(" ") < 3):
+        safe_word = process_text(input("Please enter a phrase with a minumum of four words.\n"))
+def get_safe_word():
+    return safe_word
 
 
 # Continuously listen for commands
 def run():
+
     while True:
         if (exit):
             print("Program Exiting...")
             break
         else:
             try:
-                time.sleep(0.1)
+                listen_for_phrase()
             except KeyboardInterrupt:  # Catch Ctrl+C interrupts to exit gracefully
                 print("KeyboardInterrupt...")
                 break
-            listen_for_command()
-            
+        
 set_safe_word()
 
 print("Safe Word/Sentance : " + safe_word)
