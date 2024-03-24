@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Recognition Web App</title>
+</head>
+<body>
+    <h1>Speech Recognition Web App</h1>
+    <button id="setSafeWord">Set Safe Word</button>
+    <button id="runProgram">Run Program</button>
+    <button id="exitProgram">Exit Program</button>
+
+    <script>
+        document.getElementById("setSafeWord").addEventListener("click", function() {
+            var safeWord = prompt("Please enter your safe phrase, a minimum number of four words is required to reduce false readings. To change this later, go to settings.");
+            if (safeWord.split(' ').length < 4) {
+                alert("Please enter a phrase with a minimum of four words.");
+                return;
+            }
+
+            fetch('/set_safe_word', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ safeWord: safeWord })
+            })
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById("runProgram").addEventListener("click", function() {
+            fetch('/run', {
+                method: 'POST'
+            })
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById("exitProgram").addEventListener("click", function() {
+            fetch('/exit_program', {
+                method: 'POST'
+            })
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
